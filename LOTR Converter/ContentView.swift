@@ -9,7 +9,9 @@ import SwiftUI
 
 struct ContentView: View {
     @State var showInfoScreen = false
-    
+    @State var leftAmount = ""
+    @State var rightAmount = ""
+
     var body: some View {
         ZStack {
             // BG Image
@@ -36,12 +38,15 @@ struct ContentView: View {
                             Image(.silverpiece)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 40)
+                                .frame(height: 40)
                             Text("Silver Piece")
                                 .foregroundStyle(.white)
                                 .font(.headline)
                         }
-                        Text("Text Field")
+                        .padding(.bottom, -2)
+
+                        TextField("Enter amount", text: $leftAmount)
+                            .textFieldStyle(.roundedBorder)
                     }
 
                     // Equal sign
@@ -59,15 +64,23 @@ struct ContentView: View {
                             Image(.goldpiece)
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 40)
+                                .frame(height: 40)
                         }
-                        Text("Text Field")
+                        .padding(.bottom, -2)
+
+                        TextField("Enter amount", text: $rightAmount)
+                            .textFieldStyle(.roundedBorder)
+                            .multilineTextAlignment(.trailing)
                     }
 
                 }
-                
+                .padding()
+                .background(.black.opacity(0.5))
+                .clipShape(RoundedRectangle(cornerRadius: 20))
+                .padding()
+
                 Spacer()
-                
+
                 HStack {
                     Spacer()
                     Button {
