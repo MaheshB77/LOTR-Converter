@@ -45,7 +45,7 @@ struct ContentView: View {
                         }
                         .padding(.bottom, -2)
 
-                        TextField("Enter amount", text: $leftAmount)
+                        TextField("Amount", text: $leftAmount)
                             .textFieldStyle(.roundedBorder)
                     }
 
@@ -68,7 +68,7 @@ struct ContentView: View {
                         }
                         .padding(.bottom, -2)
 
-                        TextField("Enter amount", text: $rightAmount)
+                        TextField("Amount", text: $rightAmount)
                             .textFieldStyle(.roundedBorder)
                             .multilineTextAlignment(.trailing)
                     }
