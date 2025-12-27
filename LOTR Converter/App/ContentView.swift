@@ -171,6 +171,10 @@ struct ContentView: View {
                 bottomCurrency: $rightCurrency
             )
         }
+        .onTapGesture {
+            leftFocus = false
+            rightFocus = false
+        }
     }
 }
 
