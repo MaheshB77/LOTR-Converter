@@ -15,6 +15,7 @@ struct CurrencyIcon: View {
             Image(img)
                 .resizable()
                 .scaledToFit()
+                .padding(2)
             
             Text(title)
                 .padding(2)

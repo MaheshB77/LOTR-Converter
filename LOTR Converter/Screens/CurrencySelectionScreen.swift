@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CurrencySelectionScreen: View {
     @Environment(\.dismiss) var dismiss
-    @State var selectedCurrency: Currency?
+    @State var topCurrency: Currency?
+    @State var bottomCurrency: Currency?
 
     var body: some View {
         ZStack {
@@ -22,27 +23,12 @@ struct CurrencySelectionScreen: View {
 
                 Text("Select the currency you want to convert : ")
                     .fontWeight(.bold)
-
-                // Currency Icons Grid
-                LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
-                    ForEach(Currency.allCases) { currency in
-
-                        CurrencyIcon(img: currency.image, title: currency.name)
-                            .overlay(
-                                (selectedCurrency != nil
-                                    && selectedCurrency == currency)
-                                    ? RoundedRectangle(cornerRadius: 12)
-                                        .stroke(.black, lineWidth: 2)
-                                        .opacity(0.8)
-                                    : nil
-                            ).onTapGesture {
-                                selectedCurrency = currency
-                            }
-                    }
-                }
+                IconGrid(selectedCurrency: topCurrency)
 
                 Text("Select the currency you would like to convert into : ")
                     .fontWeight(.bold)
+                    .padding(.top)
+                IconGrid(selectedCurrency: bottomCurrency)
 
                 Button("Got it!") {
                     dismiss()
@@ -51,12 +37,14 @@ struct CurrencySelectionScreen: View {
                 .buttonStyle(.borderedProminent)
                 .tint(.brown.mix(with: .black, by: 0.2))
                 .padding()
+                .foregroundStyle(.white)
             }
             .multilineTextAlignment(.center)
         }
+        .foregroundStyle(.black)
     }
 }
 
 #Preview {
-    CurrencySelectionScreen(selectedCurrency: .goldPiece)
+    CurrencySelectionScreen(topCurrency: .goldPiece)
 }
