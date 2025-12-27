@@ -56,17 +56,6 @@ struct ContentView: View {
                         TextField("Amount", text: $leftAmount)
                             .textFieldStyle(.roundedBorder)
                             .focused($leftFocus)
-                            .onChange(
-                                of: leftAmount,
-                                {
-                                    if leftFocus {
-                                        rightAmount = leftCurrency.convert(
-                                            leftAmount,
-                                            to: rightCurrency
-                                        )
-                                    }
-                                }
-                            )
                     }
 
                     // Equal sign
@@ -95,25 +84,14 @@ struct ContentView: View {
                             .textFieldStyle(.roundedBorder)
                             .multilineTextAlignment(.trailing)
                             .focused($rightFocus)
-                            .onChange(
-                                of: rightAmount,
-                                {
-                                    if rightFocus {
-
-                                        leftAmount = rightCurrency.convert(
-                                            rightAmount,
-                                            to: leftCurrency
-                                        )
-                                    }
-                                }
-                            )
                     }
 
                 }
                 .padding()
                 .background(.black.opacity(0.5))
                 .clipShape(RoundedRectangle(cornerRadius: 20))
-                .padding()
+                .padding(8)
+                .keyboardType(.decimalPad)
 
                 Spacer()
 
@@ -132,7 +110,48 @@ struct ContentView: View {
 
             }
         }
+        .onChange(
+            of: leftCurrency,
+            {
+                leftAmount = rightCurrency.convert(
+                    rightAmount,
+                    to: leftCurrency
+                )
+            }
+        )
+        .onChange(
+            of: rightCurrency,
+            {
+                rightAmount = leftCurrency.convert(
+                    leftAmount,
+                    to: rightCurrency
+                )
+            }
+        )
 
+        .onChange(
+            of: leftAmount,
+            {
+                if leftFocus {
+                    rightAmount = leftCurrency.convert(
+                        leftAmount,
+                        to: rightCurrency
+                    )
+                }
+            }
+        )
+        .onChange(
+            of: rightAmount,
+            {
+                if rightFocus {
+
+                    leftAmount = rightCurrency.convert(
+                        rightAmount,
+                        to: leftCurrency
+                    )
+                }
+            }
+        )
         .sheet(isPresented: $showInfoScreen) {
             ExchangeInfo()
         }
