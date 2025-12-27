@@ -90,7 +90,11 @@ struct ContentView: View {
                         Image(systemName: "info.circle.fill")
                             .font(.largeTitle)
                             .foregroundStyle(.white)
-                    }.padding(.trailing, 28)
+                    }
+                    .padding(.trailing, 28)
+                    .sheet(isPresented: $showInfoScreen) {
+                        ExchangeInfo()
+                    }
                 }
 
             }
