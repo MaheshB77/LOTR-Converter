@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct IconGrid: View {
-    @State var selectedCurrency: Currency?
+    @Binding var selectedCurrency: Currency
 
     var body: some View {
         LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
@@ -16,8 +16,7 @@ struct IconGrid: View {
 
                 CurrencyIcon(img: currency.image, title: currency.name)
                     .overlay(
-                        (selectedCurrency != nil
-                            && selectedCurrency == currency)
+                        (selectedCurrency == currency)
                             ? RoundedRectangle(cornerRadius: 12)
                                 .stroke(.black, lineWidth: 2)
                                 .opacity(0.8)
@@ -28,8 +27,4 @@ struct IconGrid: View {
             }
         }
     }
-}
-
-#Preview {
-    IconGrid()
 }

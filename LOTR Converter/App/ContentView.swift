@@ -111,8 +111,8 @@ struct ContentView: View {
         }
         .sheet(isPresented: $showCurrencyPicker) {
             CurrencySelectionScreen(
-                topCurrency: leftCurrency,
-                bottomCurrency: rightCurrency
+                topCurrency: $leftCurrency,
+                bottomCurrency: $rightCurrency
             )
         }
     }
